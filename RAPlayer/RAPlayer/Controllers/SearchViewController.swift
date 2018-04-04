@@ -1,34 +1,23 @@
 //
-//  TopViewController.swift
+//  SearchViewController.swift
 //  RAPlayer
 //
-//  Created by Raphael Abehssera on 03/04/2018.
+//  Created by Raphael Abehssera on 04/04/2018.
 //  Copyright © 2018 Raphael Abehssera. All rights reserved.
 //
 
 import UIKit
-import Pulley
 
-class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
-    var tracks = [Track]()
-    
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var tracks = [Track]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        WSManager.sharedInstance.appleMusicTop100 { (success, tracks, error) in
-            if success {
-                self.tracks = tracks!
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            
-        }
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.searchBar.delegate = self
@@ -37,6 +26,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
         
         self.tableView.register(UINib(nibName: "TrackTableViewCell", bundle: nil), forCellReuseIdentifier: "TrackTableViewCell")
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,7 +43,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tracks.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrackTableViewCell", for: indexPath) as! TrackTableViewCell
         cell.configure(with: tracks[indexPath.row])
@@ -82,4 +72,5 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.tableView.reloadData()
     }
     
+
 }
