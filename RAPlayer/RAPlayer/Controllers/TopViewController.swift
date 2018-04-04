@@ -85,8 +85,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
-    //MARK: Notifications
-    
+    //MARK: Notifications    
     @objc func playerDidChange() {
         self.tableView.reloadData()
     }
