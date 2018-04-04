@@ -33,6 +33,9 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.tableView.dataSource = self
         self.searchBar.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
+        
         self.tableView.register(UINib(nibName: "TrackTableViewCell", bundle: nil), forCellReuseIdentifier: "TrackTableViewCell")
     }
 
@@ -41,7 +44,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-
+    //MARK : UITableView
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -62,6 +66,20 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Player.sharedInstance.play(track: tracks[indexPath.row], playlist: tracks)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if (Player.sharedInstance.playingTrack != nil) {
+            return 50
+        } else {
+            return CGFloat.leastNormalMagnitude
+        }
+    }
+    
+    //MARK : Notifications
+    
+    @objc func playerDidChange() {
+        self.tableView.reloadData()
     }
     
 }

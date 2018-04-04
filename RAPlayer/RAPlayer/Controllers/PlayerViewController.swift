@@ -10,6 +10,9 @@ import UIKit
 import Pulley
 
 class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate {
+    var context = CIContext(options: nil)
+    
+    @IBOutlet weak var backgroundPictureView: UIImageView!
     @IBOutlet weak var albumPictureView: UIView!
     @IBOutlet weak var controlsView: UIView!
     
@@ -21,7 +24,6 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidStartPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
         
     }
@@ -47,13 +49,13 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     func supportedDrawerPositions() -> [PulleyPosition] {
         return [PulleyPosition.collapsed, PulleyPosition.open]
     }
-
-    @objc func trackDidFinishPlaying(notification: Notification) {
-        
-    }
     
     @objc func trackDidStartPlaying(notification: Notification) {
         let track = Player.sharedInstance.playingTrack
+        
+        backgroundPictureView.sd_setImage(with: URL(string: (track?.picture)!)) { (image, error, cacheType, url) in
+            self.blurEffect()
+        }
         
         picture.sd_setImage(with: URL(string: (track?.picture)!), completed: nil)
         titleLbl.text = track?.title
@@ -68,5 +70,21 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
             albumPictureView.isHidden = false
             controlsView.isHidden = false
         }
+    }
+    
+    func blurEffect() {
+        let currentFilter = CIFilter(name: "CIGaussianBlur")
+        let beginImage = CIImage(image: backgroundPictureView.image!)
+        currentFilter!.setValue(beginImage, forKey: kCIInputImageKey)
+        currentFilter!.setValue(10, forKey: kCIInputRadiusKey)
+        
+        let cropFilter = CIFilter(name: "CICrop")
+        cropFilter!.setValue(currentFilter!.outputImage, forKey: kCIInputImageKey)
+        cropFilter!.setValue(CIVector(cgRect: beginImage!.extent), forKey: "inputRectangle")
+        
+        let output = cropFilter!.outputImage
+        let cgimg = context.createCGImage(output!, from: output!.extent)
+        let processedImage = UIImage(cgImage: cgimg!)
+        backgroundPictureView.image = processedImage
     }
 }
