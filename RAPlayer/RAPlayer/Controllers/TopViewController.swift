@@ -18,6 +18,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Browse"
 
         WSManager.sharedInstance.appleMusicTop100 { (success, tracks, error) in
             if success {
@@ -70,7 +72,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
-            return 50
+            return 75
         } else {
             return CGFloat.leastNormalMagnitude
         }

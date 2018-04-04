@@ -15,6 +15,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     @IBOutlet weak var backgroundPictureView: UIImageView!
     @IBOutlet weak var albumPictureView: UIView!
     @IBOutlet weak var controlsView: UIView!
+    @IBOutlet weak var openView: UIView!
     
     
     @IBOutlet weak var picture: UIImageView!
@@ -33,10 +34,15 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didTouchOpenButton(_ sender: Any) {
+        if let pulley = self.parent as? PulleyViewController {
+            pulley.setDrawerPosition(position: PulleyPosition.open, animated: true)
+        }
+    }
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
-            return 50
+            return 75
         } else {
             return 0
         }
@@ -66,9 +72,11 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         if (drawer.drawerPosition == .collapsed) {
             albumPictureView.isHidden = true
             controlsView.isHidden = true
+            openView.isHidden = false
         } else {
             albumPictureView.isHidden = false
             controlsView.isHidden = false
+            openView.isHidden = true
         }
     }
     

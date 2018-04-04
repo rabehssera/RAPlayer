@@ -17,6 +17,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Search"
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -63,7 +65,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
-            return 50
+            return 75
         } else {
             return CGFloat.leastNormalMagnitude
         }
