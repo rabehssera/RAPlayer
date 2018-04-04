@@ -42,5 +42,13 @@ class Track: NSObject {
             }
         }
     }
+    
+    init(searchResult: [String: Any]) {
+        super.init()
+        self.title = searchResult["trackName"] as! String
+        self.artist = searchResult["artistName"] as! String
+        self.picture =  searchResult["artworkUrl100"] as! String
+        self.previewURL = searchResult["previewUrl"] as! String
+    }
 
 }

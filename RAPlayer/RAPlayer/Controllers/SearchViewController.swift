@@ -26,6 +26,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
         
         self.tableView.register(UINib(nibName: "TrackTableViewCell", bundle: nil), forCellReuseIdentifier: "TrackTableViewCell")
+        
+        searchBar.becomeFirstResponder()
 
     }
 
@@ -55,6 +57,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.searchBar.resignFirstResponder()
         Player.sharedInstance.play(track: tracks[indexPath.row], playlist: tracks)
     }
     
@@ -64,6 +67,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             return CGFloat.leastNormalMagnitude
         }
+    }
+    
+    //MARK : UISearchBar
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+        if searchBar.text != nil {
+            WSManager.sharedInstance.search(text: searchBar.text!) { (success, result, error) in
+                if success {
+                    self.tracks = result!["tracks"] as! [Track]
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
     }
     
     //MARK : Notifications

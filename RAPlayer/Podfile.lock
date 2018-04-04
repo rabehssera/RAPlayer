@@ -1,5 +1,5 @@
 PODS:
-  - Pulley (2.3.0)
+  - Pulley (2.3.1)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -9,7 +9,7 @@ DEPENDENCIES:
   - SDWebImage
 
 SPEC CHECKSUMS:
-  Pulley: 98de6094769f3371d43f97dd976e35fe63d9edc9
+  Pulley: 4cc7e74a6e438519e5d428ca311ff75dae747cae
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
 PODFILE CHECKSUM: e7b9fad2cd99b56eaa5a56e180feb12ad7b0d240

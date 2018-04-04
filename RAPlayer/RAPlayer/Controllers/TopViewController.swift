@@ -76,6 +76,13 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    //MARK : UISearchBar
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController")
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
     //MARK : Notifications
     
     @objc func playerDidChange() {
