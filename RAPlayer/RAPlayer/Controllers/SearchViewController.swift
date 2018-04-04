@@ -38,7 +38,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK : UITableView
+    //MARK: UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -71,7 +71,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    //MARK : UISearchBar
+    //MARK: UISearchBar Delegate
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.searchBar.resignFirstResponder()
@@ -91,7 +91,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.searchBar.resignFirstResponder()
     }
     
-    //MARK : Notifications
+    //MARK: Notifications
     
     @objc func playerDidChange() {
         self.tableView.reloadData()

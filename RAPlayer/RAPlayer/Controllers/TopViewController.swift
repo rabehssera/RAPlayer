@@ -46,7 +46,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK : UITableView
+    //MARK: UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -78,14 +78,14 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    //MARK : UISearchBar
+    //MARK: UISearchBar Delegate
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController")
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
-    //MARK : Notifications
+    //MARK: Notifications
     
     @objc func playerDidChange() {
         self.tableView.reloadData()

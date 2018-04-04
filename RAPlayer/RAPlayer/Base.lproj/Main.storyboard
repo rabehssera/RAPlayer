@@ -246,6 +246,7 @@
                         <outlet property="controlsView" destination="XlY-Zx-0eA" id="nGJ-WV-dLS"/>
                         <outlet property="openView" destination="8Qo-PL-AMM" id="7EV-Xa-zfx"/>
                         <outlet property="picture" destination="qjK-2y-7Tj" id="Isw-So-7SC"/>
+                        <outlet property="progressView" destination="P6v-Ml-KyE" id="NRq-F5-4FW"/>
                         <outlet property="titleLbl" destination="80G-hY-P6T" id="NcR-Ig-3M5"/>
                     </connections>
                 </viewController>

@@ -22,11 +22,14 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var artistLbl: UILabel!
     
+    @IBOutlet weak var progressView: UIProgressView!
+    
+    //MARK: Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidStartPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +42,8 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
             pulley.setDrawerPosition(position: PulleyPosition.open, animated: true)
         }
     }
+    
+    // MARK: Pulley Delegate
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
@@ -56,6 +61,20 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         return [PulleyPosition.collapsed, PulleyPosition.open]
     }
     
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
+        if (drawer.drawerPosition == .collapsed) {
+            albumPictureView.isHidden = true
+            controlsView.isHidden = true
+            openView.isHidden = false
+        } else {
+            albumPictureView.isHidden = false
+            controlsView.isHidden = false
+            openView.isHidden = true
+        }
+    }
+    
+    //MARK: Notification
+    
     @objc func trackDidStartPlaying(notification: Notification) {
         let track = Player.sharedInstance.playingTrack
         
@@ -68,17 +87,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         artistLbl.text = track?.artist
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
-        if (drawer.drawerPosition == .collapsed) {
-            albumPictureView.isHidden = true
-            controlsView.isHidden = true
-            openView.isHidden = false
-        } else {
-            albumPictureView.isHidden = false
-            controlsView.isHidden = false
-            openView.isHidden = true
-        }
-    }
+    // MARK: Utils
     
     func blurEffect() {
         let currentFilter = CIFilter(name: "CIGaussianBlur")
