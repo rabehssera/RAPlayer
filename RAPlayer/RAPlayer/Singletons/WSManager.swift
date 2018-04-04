@@ -27,7 +27,7 @@ class WSManager {
                             let songs = feed["entry"] as! [[String: Any]]
                             var tracks = [Track]()
                             for song in songs {
-                                let track = Track(dict: song)
+                                let track = Track(feed: song)
                                 tracks.append(track)
                             }
                             completion (true,tracks, nil)

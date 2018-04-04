@@ -15,6 +15,8 @@ class MainViewController: PulleyViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(trackDidStartPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,5 +34,15 @@ class MainViewController: PulleyViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @objc func trackDidFinishPlaying(notification: Notification) {
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc func trackDidStartPlaying(notification: Notification) {
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
 
 }

@@ -60,4 +60,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         return UITableViewAutomaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Player.sharedInstance.play(track: tracks[indexPath.row], playlist: tracks)
+    }
+    
 }

@@ -12,7 +12,7 @@ import AVFoundation
 import AudioToolbox
 
 class Player {
-    static let sharedInstance = WSManager()
+    static let sharedInstance = Player()
     
     var playerItem: AVPlayerItem? = nil
     var player: AVPlayer? = nil
@@ -43,7 +43,24 @@ class Player {
         }
         
         self.playlist = playlist
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying")))
         
+    }
+    
+    func playNext() {
+        let index = self.playlist?.index(of: self.playingTrack!)
+        if let _ = index {
+            let track = self.playlist![index! + 1]
+            self.play(track: track, playlist: playlist!)
+        }
+    }
+    
+    func playPrevious() {
+        let index = self.playlist?.index(of: self.playingTrack!)
+        if let _ = index {
+            let track = self.playlist![index! - 1]
+            self.play(track: track, playlist: playlist!)
+        }
     }
     
     @objc func trackDidFinishPlaying(notification: Notification) {
