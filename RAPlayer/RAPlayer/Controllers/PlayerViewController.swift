@@ -40,8 +40,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidStartPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStopPlaying"), object: nil)
         
         titleLbl.type = .leftRight
         artistLbl.type = .leftRight

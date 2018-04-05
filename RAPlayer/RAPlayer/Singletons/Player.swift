@@ -92,10 +92,12 @@ class Player {
             } else {
                 self.playingTrack = nil
                 self.playlist = nil
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "AVPlayerItemDidStopPlaying")))
             }
         } else {
             self.playingTrack = nil
             self.playlist = nil
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "AVPlayerItemDidStopPlaying")))
         }
     }
     

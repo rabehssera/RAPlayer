@@ -15,8 +15,8 @@ class MainViewController: PulleyViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidStop), name: Notification.Name(rawValue: "AVPlayerItemDidStopPlaying"), object: nil)
         
         self.topInset = 0
         self.drawerCornerRadius = 0
@@ -41,6 +41,13 @@ class MainViewController: PulleyViewController {
     @objc func playerDidChange(notification: Notification) {
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
+        self.setDrawerPosition(position: .open, animated: true)
+    }
+    
+    @objc func playerDidStop(notification: Notification) {
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        self.setDrawerPosition(position: .collapsed, animated: true)
     }
 
 }
