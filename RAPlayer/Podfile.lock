@@ -1,17 +1,20 @@
 PODS:
+  - MarqueeLabel/Swift (3.1.4)
   - Pulley (2.3.2)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
 
 DEPENDENCIES:
+  - MarqueeLabel/Swift
   - Pulley
   - SDWebImage
 
 SPEC CHECKSUMS:
+  MarqueeLabel: bf768455fe88d427f71476ebb23f9092b660f40b
   Pulley: 9c0d308f57a3eacf19e0d1d5c374f3ba8364741a
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
-PODFILE CHECKSUM: e7b9fad2cd99b56eaa5a56e180feb12ad7b0d240
+PODFILE CHECKSUM: e97dc30091c654c09ac05446da108482af08c381
 
 COCOAPODS: 1.3.1

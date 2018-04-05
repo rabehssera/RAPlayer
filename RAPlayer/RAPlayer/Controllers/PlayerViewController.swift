@@ -11,6 +11,7 @@ import Pulley
 import AVKit
 import AVFoundation
 import AudioToolbox
+import MarqueeLabel
 
 class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate {
     var context = CIContext(options: nil)
@@ -22,8 +23,8 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     
     
     @IBOutlet weak var picture: UIImageView!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var artistLbl: UILabel!
+    @IBOutlet weak var titleLbl: MarqueeLabel!
+    @IBOutlet weak var artistLbl: MarqueeLabel!
     
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var totalTimeLbl: UILabel!
@@ -41,6 +42,9 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
         
+        titleLbl.type = .leftRight
+        artistLbl.type = .leftRight
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,11 +52,27 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Actions
+    
     @IBAction func didTouchOpenButton(_ sender: Any) {
         if let pulley = self.parent as? PulleyViewController {
             pulley.setDrawerPosition(position: PulleyPosition.open, animated: true)
         }
     }
+    
+    @IBAction func didTouchPreviousButton(_ sender: Any) {
+        Player.sharedInstance.playPrevious()
+    }
+    
+    @IBAction func didTouchNextButton(_ sender: Any) {
+        Player.sharedInstance.playNext()
+    }
+    
+    @IBAction func didTouchPlayPauseButton(_ sender: Any) {
+        
+    }
+    
+    
     
     // MARK: Pulley Delegate
     

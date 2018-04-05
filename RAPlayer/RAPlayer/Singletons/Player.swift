@@ -53,13 +53,7 @@ class Player {
             if (index! + 1) < (self.playlist?.count)! {
                 let track = self.playlist![index! + 1]
                 self.play(track: track, playlist: playlist!)
-            } else {
-                self.playingTrack = nil
-                self.playlist = nil
             }
-        } else {
-            self.playingTrack = nil
-            self.playlist = nil
         }
     }
     
@@ -76,7 +70,19 @@ class Player {
     }
     
     @objc func trackDidFinishPlaying(notification: Notification) {
-        playNext()
+        let index = self.playlist?.index(of: self.playingTrack!)
+        if let _ = index {
+            if (index! + 1) < (self.playlist?.count)! {
+                let track = self.playlist![index! + 1]
+                self.play(track: track, playlist: playlist!)
+            } else {
+                self.playingTrack = nil
+                self.playlist = nil
+            }
+        } else {
+            self.playingTrack = nil
+            self.playlist = nil
+        }
     }
     
 
