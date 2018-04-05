@@ -18,6 +18,7 @@ class Player {
     var player: AVPlayer? = nil
     var playingTrack: Track? = nil
     var playlist: [Track]? = nil
+    var isPlaying = false
     
     func play(track : Track, playlist: [Track]) {
         playerItem = AVPlayerItem(url: URL(string: track.previewURL)!)
@@ -36,15 +37,27 @@ class Player {
         
         if (self.playingTrack == track) {
             self.player?.pause()
+            self.isPlaying = false
         } else {
             self.player?.pause()
             self.player?.play()
             self.playingTrack = track
+            self.isPlaying = true
         }
         
         self.playlist = playlist
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying")))
         
+    }
+    
+    func pause() {
+        self.isPlaying = false
+        self.player?.pause()
+    }
+    
+    func resume() {
+        self.isPlaying = true
+        self.player?.play()
     }
     
     func playNext() {
@@ -70,6 +83,7 @@ class Player {
     }
     
     @objc func trackDidFinishPlaying(notification: Notification) {
+        self.isPlaying = false
         let index = self.playlist?.index(of: self.playingTrack!)
         if let _ = index {
             if (index! + 1) < (self.playlist?.count)! {

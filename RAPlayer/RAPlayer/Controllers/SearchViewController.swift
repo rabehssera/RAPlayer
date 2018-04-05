@@ -65,7 +65,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
-            return 75
+            return Constants.collapsedPlayerHeight
         } else {
             return CGFloat.leastNormalMagnitude
         }

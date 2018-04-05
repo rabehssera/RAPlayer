@@ -89,10 +89,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qo-PL-AMM">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Um-pQ-BDW">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Um-pQ-BDW">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                                 <state key="normal" image="up_arrow"/>
                                                 <connections>
                                                     <action selector="didTouchOpenButton:" destination="4Oe-pH-uMj" eventType="touchUpInside" id="bMZ-Id-8sv"/>
@@ -104,12 +104,12 @@
                                             <constraint firstAttribute="trailing" secondItem="9Um-pQ-BDW" secondAttribute="trailing" id="5w4-yX-MTM"/>
                                             <constraint firstItem="9Um-pQ-BDW" firstAttribute="leading" secondItem="8Qo-PL-AMM" secondAttribute="leading" id="Aef-2k-4TW"/>
                                             <constraint firstItem="9Um-pQ-BDW" firstAttribute="top" secondItem="8Qo-PL-AMM" secondAttribute="top" id="jHb-td-SrX"/>
-                                            <constraint firstAttribute="bottom" secondItem="9Um-pQ-BDW" secondAttribute="bottom" id="n76-dj-Ocq"/>
-                                            <constraint firstAttribute="height" constant="20" id="x8G-LJ-DuX"/>
+                                            <constraint firstAttribute="bottom" secondItem="9Um-pQ-BDW" secondAttribute="bottom" id="vzx-3e-sHE"/>
+                                            <constraint firstAttribute="height" constant="32" id="x8G-LJ-DuX"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwa-6l-aZZ">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="260"/>
+                                        <rect key="frame" x="0.0" y="32" width="375" height="260"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjK-2y-7Tj">
                                                 <rect key="frame" x="87" y="30" width="200" height="200"/>
@@ -127,7 +127,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xsp-Jm-ouT">
-                                        <rect key="frame" x="0.0" y="280" width="375" height="55"/>
+                                        <rect key="frame" x="0.0" y="292" width="375" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80G-hY-P6T" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                                 <rect key="frame" x="10" y="5" width="355" height="20.5"/>
@@ -155,7 +155,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-Zx-0eA">
-                                        <rect key="frame" x="0.0" y="335" width="375" height="332"/>
+                                        <rect key="frame" x="0.0" y="347" width="375" height="320"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgy-RC-SEE">
                                                 <rect key="frame" x="30" y="10.5" width="273" height="14.5"/>
@@ -173,14 +173,17 @@
                                                 <rect key="frame" x="30" y="30" width="314" height="0.0"/>
                                             </progressView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7aa-w7-Vf1">
-                                                <rect key="frame" x="30" y="60" width="315" height="222"/>
+                                                <rect key="frame" x="30" y="60" width="315" height="210"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5T-2v-xvv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="222"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="210"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxf-qD-oVu">
-                                                                <rect key="frame" x="22.5" y="96" width="59" height="30"/>
-                                                                <state key="normal" title="Previous"/>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxf-qD-oVu">
+                                                                <rect key="frame" x="10" y="62.5" width="85" height="85"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="dxf-qD-oVu" secondAttribute="height" id="DeX-ea-isr"/>
+                                                                </constraints>
+                                                                <state key="normal" image="previous"/>
                                                                 <connections>
                                                                     <action selector="didTouchPreviousButton:" destination="4Oe-pH-uMj" eventType="touchUpInside" id="3w6-iT-Pig"/>
                                                                 </connections>
@@ -188,16 +191,20 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="dxf-qD-oVu" firstAttribute="leading" secondItem="D5T-2v-xvv" secondAttribute="leading" constant="10" id="VmG-x0-I7W"/>
                                                             <constraint firstItem="dxf-qD-oVu" firstAttribute="centerX" secondItem="D5T-2v-xvv" secondAttribute="centerX" id="hyL-GN-KjZ"/>
                                                             <constraint firstItem="dxf-qD-oVu" firstAttribute="centerY" secondItem="D5T-2v-xvv" secondAttribute="centerY" id="qQg-uo-2TH"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBQ-ax-dji">
-                                                        <rect key="frame" x="105" y="0.0" width="105" height="222"/>
+                                                        <rect key="frame" x="105" y="0.0" width="105" height="210"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIu-Ei-kgH">
-                                                                <rect key="frame" x="15" y="96" width="74" height="30"/>
-                                                                <state key="normal" title="Play/Pause"/>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIu-Ei-kgH">
+                                                                <rect key="frame" x="10" y="62.5" width="85" height="85"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="gIu-Ei-kgH" secondAttribute="height" id="QhZ-Kl-EsA"/>
+                                                                </constraints>
+                                                                <state key="normal" image="play"/>
                                                                 <connections>
                                                                     <action selector="didTouchPlayPauseButton:" destination="4Oe-pH-uMj" eventType="touchUpInside" id="0DP-V3-T7D"/>
                                                                 </connections>
@@ -207,14 +214,18 @@
                                                         <constraints>
                                                             <constraint firstItem="gIu-Ei-kgH" firstAttribute="centerY" secondItem="WBQ-ax-dji" secondAttribute="centerY" id="XdB-mB-Jke"/>
                                                             <constraint firstItem="gIu-Ei-kgH" firstAttribute="centerX" secondItem="WBQ-ax-dji" secondAttribute="centerX" id="ZXR-oB-3Hf"/>
+                                                            <constraint firstItem="gIu-Ei-kgH" firstAttribute="leading" secondItem="WBQ-ax-dji" secondAttribute="leading" constant="10" id="zfJ-5R-Yi1"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQz-og-Rhd">
-                                                        <rect key="frame" x="210" y="0.0" width="105" height="222"/>
+                                                        <rect key="frame" x="210" y="0.0" width="105" height="210"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-Ur-npP">
-                                                                <rect key="frame" x="36" y="96" width="32" height="30"/>
-                                                                <state key="normal" title="Next"/>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-Ur-npP">
+                                                                <rect key="frame" x="10" y="62.5" width="85" height="85"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="q4j-Ur-npP" secondAttribute="height" id="49c-mP-6Uj"/>
+                                                                </constraints>
+                                                                <state key="normal" image="next"/>
                                                                 <connections>
                                                                     <action selector="didTouchNextButton:" destination="4Oe-pH-uMj" eventType="touchUpInside" id="fTG-fa-eFX"/>
                                                                 </connections>
@@ -223,6 +234,7 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="q4j-Ur-npP" firstAttribute="centerY" secondItem="IQz-og-Rhd" secondAttribute="centerY" id="21m-o9-zhC"/>
+                                                            <constraint firstItem="q4j-Ur-npP" firstAttribute="leading" secondItem="IQz-og-Rhd" secondAttribute="leading" constant="10" id="oVJ-mk-al3"/>
                                                             <constraint firstItem="q4j-Ur-npP" firstAttribute="centerX" secondItem="IQz-og-Rhd" secondAttribute="centerX" id="stO-43-FVx"/>
                                                         </constraints>
                                                     </view>
@@ -273,6 +285,7 @@
                         <outlet property="durationLbl" destination="tgy-RC-SEE" id="A0e-fk-i7G"/>
                         <outlet property="openView" destination="8Qo-PL-AMM" id="7EV-Xa-zfx"/>
                         <outlet property="picture" destination="qjK-2y-7Tj" id="Isw-So-7SC"/>
+                        <outlet property="playButton" destination="gIu-Ei-kgH" id="5W7-EN-k8b"/>
                         <outlet property="progressView" destination="P6v-Ml-KyE" id="NRq-F5-4FW"/>
                         <outlet property="titleLbl" destination="80G-hY-P6T" id="NcR-Ig-3M5"/>
                         <outlet property="totalTimeLbl" destination="Itu-5c-jiV" id="sXi-1c-cDb"/>
@@ -326,6 +339,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="up_arrow" width="10" height="10"/>
+        <image name="next" width="128" height="128"/>
+        <image name="play" width="128" height="128"/>
+        <image name="previous" width="128" height="128"/>
+        <image name="up_arrow" width="32" height="32"/>
     </resources>
 </document>

@@ -31,6 +31,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     
     @IBOutlet weak var progressView: UIProgressView!
     
+    @IBOutlet weak var playButton: UIButton!
     var playbackTimeObserver: Any?
     
     //MARK: Functions
@@ -69,7 +70,13 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     }
     
     @IBAction func didTouchPlayPauseButton(_ sender: Any) {
-        
+        if Player.sharedInstance.isPlaying {
+            playButton.setImage(UIImage(named: "play"), for: UIControlState.normal)
+            Player.sharedInstance.pause()
+        } else {
+            playButton.setImage(UIImage(named: "pause"), for: UIControlState.normal)
+            Player.sharedInstance.resume()
+        }
     }
     
     
@@ -78,7 +85,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if (Player.sharedInstance.playingTrack != nil) {
-            return 75
+            return Constants.collapsedPlayerHeight
         } else {
             return 0
         }
@@ -116,6 +123,8 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         picture.sd_setImage(with: URL(string: (track?.picture)!), completed: nil)
         titleLbl.text = track?.title
         artistLbl.text = track?.artist
+        
+        playButton.setImage(UIImage(named: "pause"), for: UIControlState.normal)
         
         let interval = CMTimeMake(1, Int32(NSEC_PER_SEC))
         playbackTimeObserver = Player.sharedInstance.player?.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { (time) in

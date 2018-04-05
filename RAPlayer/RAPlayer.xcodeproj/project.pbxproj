@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F5041F020762AE200D77C81 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5041EF20762AE200D77C81 /* Constants.swift */; };
 		3F784083207522EE00B17CE0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F784082207522EE00B17CE0 /* SearchViewController.swift */; };
 		99D50815B64EC2E2FEF19140 /* Pods_RAPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56223AA57ED67800227529C5 /* Pods_RAPlayer.framework */; };
 		9D3DF5F3206D68C900AD6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3DF5F2206D68C900AD6C2B /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F5041EF20762AE200D77C81 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3F784082207522EE00B17CE0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		56223AA57ED67800227529C5 /* Pods_RAPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RAPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3DF5EF206D68C900AD6C2B /* RAPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RAPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 				9D567FCE2072B19900CEF3EF /* Singletons */,
 				9D567FCD2072B19900CEF3EF /* Views */,
 				9D3DF5F2206D68C900AD6C2B /* AppDelegate.swift */,
+				3F5041EF20762AE200D77C81 /* Constants.swift */,
 				9D3DF5F6206D68C900AD6C2B /* Main.storyboard */,
 				9D3DF5F9206D68C900AD6C2B /* Assets.xcassets */,
 				9D3DF5FB206D68C900AD6C2B /* LaunchScreen.storyboard */,
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F784083207522EE00B17CE0 /* SearchViewController.swift in Sources */,
+				3F5041F020762AE200D77C81 /* Constants.swift in Sources */,
 				9D5680072073DE5400CEF3EF /* TopViewController.swift in Sources */,
 				9D3DF5F3206D68C900AD6C2B /* AppDelegate.swift in Sources */,
 				9D5680052073DB1A00CEF3EF /* Track.swift in Sources */,
