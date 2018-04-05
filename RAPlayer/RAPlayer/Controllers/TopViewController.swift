@@ -82,10 +82,11 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController")
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.navigationController?.pushViewController(vc!, animated: false)
+        self.searchBar.resignFirstResponder()
     }
     
-    //MARK: Notifications    
+    //MARK: Notifications
     @objc func playerDidChange() {
         self.tableView.reloadData()
     }

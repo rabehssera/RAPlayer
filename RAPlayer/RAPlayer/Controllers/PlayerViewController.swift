@@ -8,6 +8,9 @@
 
 import UIKit
 import Pulley
+import AVKit
+import AVFoundation
+import AudioToolbox
 
 class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate {
     var context = CIContext(options: nil)
@@ -22,7 +25,12 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var artistLbl: UILabel!
     
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var totalTimeLbl: UILabel!
+    
     @IBOutlet weak var progressView: UIProgressView!
+    
+    var playbackTimeObserver: Any?
     
     //MARK: Functions
     
@@ -30,6 +38,9 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidStartPlaying), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player.sharedInstance.playerItem)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +96,28 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         picture.sd_setImage(with: URL(string: (track?.picture)!), completed: nil)
         titleLbl.text = track?.title
         artistLbl.text = track?.artist
+        
+        let interval = CMTimeMake(1, Int32(NSEC_PER_SEC))
+        playbackTimeObserver = Player.sharedInstance.player?.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { (time) in
+            
+            let duration = CMTimeGetSeconds((Player.sharedInstance.playerItem?.duration)!)
+            self.progressView.progress = Float(CMTimeGetSeconds(time)/duration)
+            
+            if !(duration.isNaN) {
+                var (_, m, s) = self.secondsToHoursMinutesSeconds(seconds: Int(duration))
+                self.totalTimeLbl.text = "\(String(format: "%02d", m)):\(String(format: "%02d", s))"
+                
+                (_, m, s) = self.secondsToHoursMinutesSeconds (seconds: Int(CMTimeGetSeconds(time)))
+                self.durationLbl.text = "\(String(format: "%02d", m)):\(String(format: "%02d", s))"
+            }
+            
+        })
+    }
+    
+    @objc func trackDidFinishPlaying(notification: Notification) {
+        if let _ = self.playbackTimeObserver {
+            Player.sharedInstance.player?.removeTimeObserver(self.playbackTimeObserver!)
+        }
     }
     
     // MARK: Utils
@@ -103,5 +136,9 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         let cgimg = context.createCGImage(output!, from: output!.extent)
         let processedImage = UIImage(cgImage: cgimg!)
         backgroundPictureView.image = processedImage
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }

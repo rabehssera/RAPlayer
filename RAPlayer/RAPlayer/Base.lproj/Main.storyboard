@@ -157,6 +157,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlY-Zx-0eA">
                                         <rect key="frame" x="0.0" y="335" width="375" height="332"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgy-RC-SEE">
+                                                <rect key="frame" x="30" y="10.5" width="273" height="14.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itu-5c-jiV">
+                                                <rect key="frame" x="313" y="10.5" width="31" height="14.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="P6v-Ml-KyE">
                                                 <rect key="frame" x="30" y="30" width="314" height="0.0"/>
                                             </progressView>
@@ -210,12 +222,17 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="Itu-5c-jiV" firstAttribute="leading" secondItem="tgy-RC-SEE" secondAttribute="trailing" constant="10" id="63h-4n-OxE"/>
+                                            <constraint firstItem="Itu-5c-jiV" firstAttribute="trailing" secondItem="P6v-Ml-KyE" secondAttribute="trailing" id="7Iq-Rg-Cg2"/>
                                             <constraint firstItem="7aa-w7-Vf1" firstAttribute="centerX" secondItem="XlY-Zx-0eA" secondAttribute="centerX" id="Apu-7W-03g"/>
                                             <constraint firstItem="P6v-Ml-KyE" firstAttribute="top" secondItem="XlY-Zx-0eA" secondAttribute="top" constant="30" id="B0G-vH-Vwp"/>
                                             <constraint firstItem="P6v-Ml-KyE" firstAttribute="centerX" secondItem="XlY-Zx-0eA" secondAttribute="centerX" id="Jm7-YF-ie1"/>
+                                            <constraint firstItem="tgy-RC-SEE" firstAttribute="leading" secondItem="P6v-Ml-KyE" secondAttribute="leading" id="Xyb-hv-AEa"/>
                                             <constraint firstItem="7aa-w7-Vf1" firstAttribute="leading" secondItem="XlY-Zx-0eA" secondAttribute="leading" constant="30" id="jkB-MW-ny5"/>
                                             <constraint firstItem="P6v-Ml-KyE" firstAttribute="leading" secondItem="XlY-Zx-0eA" secondAttribute="leading" constant="30" id="mXM-8c-aMf"/>
                                             <constraint firstItem="7aa-w7-Vf1" firstAttribute="top" secondItem="P6v-Ml-KyE" secondAttribute="bottom" constant="30" id="pG1-Ge-orN"/>
+                                            <constraint firstItem="P6v-Ml-KyE" firstAttribute="top" secondItem="tgy-RC-SEE" secondAttribute="bottom" constant="5" id="ruD-a3-64i"/>
+                                            <constraint firstItem="P6v-Ml-KyE" firstAttribute="top" secondItem="Itu-5c-jiV" secondAttribute="bottom" constant="5" id="so8-Dq-7Zz"/>
                                             <constraint firstAttribute="bottom" secondItem="7aa-w7-Vf1" secondAttribute="bottom" constant="50" id="yDi-NN-RtW"/>
                                         </constraints>
                                     </view>
@@ -244,10 +261,12 @@
                         <outlet property="artistLbl" destination="eG0-ig-XjI" id="brL-Uh-Fn9"/>
                         <outlet property="backgroundPictureView" destination="reX-72-hcd" id="fbT-jj-TA8"/>
                         <outlet property="controlsView" destination="XlY-Zx-0eA" id="nGJ-WV-dLS"/>
+                        <outlet property="durationLbl" destination="tgy-RC-SEE" id="A0e-fk-i7G"/>
                         <outlet property="openView" destination="8Qo-PL-AMM" id="7EV-Xa-zfx"/>
                         <outlet property="picture" destination="qjK-2y-7Tj" id="Isw-So-7SC"/>
                         <outlet property="progressView" destination="P6v-Ml-KyE" id="NRq-F5-4FW"/>
                         <outlet property="titleLbl" destination="80G-hY-P6T" id="NcR-Ig-3M5"/>
+                        <outlet property="totalTimeLbl" destination="Itu-5c-jiV" id="sXi-1c-cDb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wC-7k-uct" userLabel="First Responder" sceneMemberID="firstResponder"/>
