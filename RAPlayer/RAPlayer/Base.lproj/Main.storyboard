@@ -60,7 +60,13 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4le-1W-X4O"/>
+                    <navigationItem key="navigationItem" id="4le-1W-X4O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="lUz-NO-0hy">
+                            <connections>
+                                <action selector="didTouchRefreshButton:" destination="3jJ-4j-ps0" id="ym9-hC-EoB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="Gho-U0-lnf" id="m4z-KV-rd9"/>
                         <outlet property="tableView" destination="W6H-JT-FHr" id="iOH-BW-Xa7"/>

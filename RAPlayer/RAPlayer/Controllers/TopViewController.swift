@@ -21,24 +21,6 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.title = "Browse"
         
-        // Fetching Top 100
-        WSManager.sharedInstance.appleMusicTop100 { (success, tracks, error) in
-            if success {
-                self.tracks = tracks!
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            } else {
-                let alert = UIAlertController(title: "Error", message: (error != nil ? error?.localizedDescription : "An error occured"), preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    
-                }))
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-        }
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.searchBar.delegate = self
@@ -47,6 +29,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
         
         self.tableView.register(UINib(nibName: "TrackTableViewCell", bundle: nil), forCellReuseIdentifier: "TrackTableViewCell")
+        
+        loadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +76,32 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController")
         self.navigationController?.pushViewController(vc!, animated: false)
         self.searchBar.resignFirstResponder()
+    }
+    
+    //Refresh control
+    
+    @IBAction func didTouchRefreshButton(_ sender: Any) {
+        loadData()
+    }
+    
+    func loadData() {
+        // Fetching Top 100
+        WSManager.sharedInstance.appleMusicTop100 { (success, tracks, error) in
+            if success {
+                self.tracks = tracks!
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                let alert = UIAlertController(title: "Error", message: (error != nil ? error?.localizedDescription : "An error occured"), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    
+                }))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     //MARK: Notifications
