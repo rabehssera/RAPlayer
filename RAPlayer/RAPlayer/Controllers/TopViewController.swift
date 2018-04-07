@@ -20,15 +20,23 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         
         self.title = "Browse"
-
+        
+        // Fetching Top 100
         WSManager.sharedInstance.appleMusicTop100 { (success, tracks, error) in
             if success {
                 self.tracks = tracks!
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            } else {
+                let alert = UIAlertController(title: "Error", message: (error != nil ? error?.localizedDescription : "An error occured"), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    
+                }))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
-            
         }
         
         self.tableView.delegate = self

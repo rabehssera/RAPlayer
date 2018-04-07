@@ -78,8 +78,6 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         }
     }
     
-    
-    
     // MARK: Pulley Delegate
     
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
@@ -125,6 +123,7 @@ class PlayerViewController: UIViewController, PulleyDrawerViewControllerDelegate
         
         playButton.setImage(UIImage(named: "pause"), for: UIControlState.normal)
         
+        //Showing progressing player
         let interval = CMTimeMake(1, Int32(NSEC_PER_SEC))
         playbackTimeObserver = Player.sharedInstance.player?.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { (time) in
             

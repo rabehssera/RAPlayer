@@ -10,16 +10,16 @@ import UIKit
 
 class Track: NSObject {
     
-    var album: Album = Album()
     var artist = ""
     var title = ""
     var picture = ""
     var previewURL = ""
     
+    //init from RSS Feed
     init(feed: [String: Any]) {
         super.init()
         
-        if let title = feed["title"] as? [String: Any] {
+        if let title = feed["im:name"] as? [String: Any] {
             self.title = title["label"] as! String
         }
         
@@ -33,7 +33,6 @@ class Track: NSObject {
             }
         }
         
-        
         if let links = feed["link"] as? [Any] {
             if let link = links.last as? [String: Any] {
                 if let attributes = link["attributes"] as? [String: Any] {
@@ -43,6 +42,7 @@ class Track: NSObject {
         }
     }
     
+    //init from Search WebService
     init(searchResult: [String: Any]) {
         super.init()
         self.title = searchResult["trackName"] as! String

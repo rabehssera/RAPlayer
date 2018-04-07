@@ -22,8 +22,12 @@ class Player {
     
     func play(track : Track, playlist: [Track]) {
         playerItem = AVPlayerItem(url: URL(string: track.previewURL)!)
+        //Subscribing to playerItem notification
         NotificationCenter.default.addObserver(self, selector: #selector(trackDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.playerItem)
+        
+        //Stopping player in case already playing
         self.player?.pause()
+        self.player = AVPlayer(playerItem: self.playerItem)
         
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
@@ -33,7 +37,7 @@ class Player {
             print(error)
         }
         
-        self.player = AVPlayer(playerItem: self.playerItem)
+        //Checking if pausing or playing new track
         
         if (self.playingTrack == track) {
             self.player?.pause()
@@ -46,6 +50,8 @@ class Player {
         }
         
         self.playlist = playlist
+        
+        //Sending notification that player started
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying")))
         
     }
@@ -61,6 +67,7 @@ class Player {
     }
     
     func playNext() {
+        //Checking if next song exists in playlist
         let index = self.playlist?.index(of: self.playingTrack!)
         if let _ = index {
             if (index! + 1) < (self.playlist?.count)! {
@@ -71,6 +78,7 @@ class Player {
     }
     
     func playPrevious() {
+        //Checking if song is first (playing same song from start) or going to previous
         let index = self.playlist?.index(of: self.playingTrack!)
         if let _ = index {
             if index! > 0 {
@@ -83,6 +91,7 @@ class Player {
     }
     
     @objc func trackDidFinishPlaying(notification: Notification) {
+        //Song finished playing and then going next or stopping if last song of playlist
         self.isPlaying = false
         let index = self.playlist?.index(of: self.playingTrack!)
         if let _ = index {

@@ -10,80 +10,75 @@ import UIKit
 
 class WSManager {
     static let sharedInstance = WSManager()
+    fileprivate let countryCode: String = (Locale.current as NSLocale).object(forKey: .countryCode) as! String
     
     func appleMusicTop100(completion:@escaping (Bool, [Track]?, Error?) -> Void) {
-        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
-            
-            let apiRequest = URLRequest(url: URL(string: "https://itunes.apple.com/\(countryCode)/rss/topsongs/limit=100/json")!)
-            
-            let dataTask = URLSession.shared.dataTask(with: apiRequest  as URLRequest) { (data, response, error) in
-                if (error != nil) {
-                    completion(false, nil, error)
-                } else {
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-                    
-                    if let dic = json as? [String : Any] {
-                        if let feed = dic["feed"] as? [String: Any] {
-                            let songs = feed["entry"] as! [[String: Any]]
-                            var tracks = [Track]()
-                            var index = 0
-                            for song in songs {
-                                let track = Track(feed: song)
-                                tracks.insert(track, at: index)
-                                index = index + 1
-                            }
-                            completion (true,tracks, nil)
-                        } else {
-                            completion(false, nil, nil)
+        //Fetching from RSS Feed
+        
+        let apiRequest = URLRequest(url: URL(string: "https://itunes.apple.com/\(countryCode)/rss/topsongs/limit=100/json")!)
+        
+        let dataTask = URLSession.shared.dataTask(with: apiRequest  as URLRequest) { (data, response, error) in
+            if (error != nil) {
+                completion(false, nil, error)
+            } else {
+                //Checking format
+                let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+                
+                if let dic = json as? [String : Any] {
+                    if let feed = dic["feed"] as? [String: Any] {
+                        let songs = feed["entry"] as! [[String: Any]]
+                        var tracks = [Track]()
+                        for song in songs {
+                            let track = Track(feed: song)
+                            tracks.append(track)
                         }
+                        completion (true,tracks, nil)
+                    } else {
+                        completion(false, nil, nil)
                     }
                 }
             }
-            
-            dataTask.resume()
         }
+        
+        dataTask.resume()
     }
     
-    func search(text: String, completion:@escaping (Bool, [String: Any]?, Error?) -> Void) {
-        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
-            let set = CharacterSet.urlQueryAllowed
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: set)
-            let urlRequest = "https://itunes.apple.com/search?term=\(encodedText!)&country=\(countryCode)&media=music"
+    func search(text: String, completion:@escaping (Bool, [Track]?, Error?) -> Void) {
+        //Creating search adequate for URL
+        let set = CharacterSet.urlQueryAllowed
+        let encodedText = text.addingPercentEncoding(withAllowedCharacters: set)
+        //Fetching from Search API
+        let urlRequest = "https://itunes.apple.com/search?term=\(encodedText!)&country=\(countryCode)&media=music&limit=200"
         
-            let apiRequest = URLRequest(url: URL(string: urlRequest)!)
-            
-            let dataTask = URLSession.shared.dataTask(with: apiRequest  as URLRequest) { (data, response, error) in
-                if (error != nil) {
-                    completion(false, nil, error)
-                } else {
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-                    
-                    var tracks = [Track]()
-                    var albums = [Album]()
-                    
-                    var completeResult: [String: Any] = [:]
-                    if let dic = json as? [String : Any] {
-                        if let results = dic["results"] as? [[String: Any]] {
-                            for result in results {
-                                let wrapperType = result["wrapperType"] as! String
-                                if wrapperType == "track" {
-                                    let track = Track(searchResult: result)
-                                    tracks.append(track)
-                                } else if wrapperType == "artistFor" {
-                                    
-                                } else if wrapperType == "collection" {
-                                    let album = Album()
-                                    albums.append(album)
-                                }
+        let apiRequest = URLRequest(url: URL(string: urlRequest)!)
+        
+        let dataTask = URLSession.shared.dataTask(with: apiRequest  as URLRequest) { (data, response, error) in
+            if (error != nil) {
+                completion(false, nil, error)
+            } else {
+                //Checking format
+                let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+                var tracks = [Track]()
+                if let dic = json as? [String : Any] {
+                    if let results = dic["results"] as? [[String: Any]] {
+                        for result in results {
+                            let wrapperType = result["wrapperType"] as! String
+                            if wrapperType == "track" {
+                                let track = Track(searchResult: result)
+                                tracks.append(track)
                             }
-                            completeResult = ["tracks": tracks, "albums": albums]
-                            completion(true, completeResult, nil)
                         }
+                        completion(true, tracks, nil)
+                    } else {
+                        completion (false, nil, nil)
                     }
+                } else {
+                    completion (false, nil, nil)
                 }
             }
-            
-            dataTask.resume()
         }
+        
+        dataTask.resume()
     }
 }
+

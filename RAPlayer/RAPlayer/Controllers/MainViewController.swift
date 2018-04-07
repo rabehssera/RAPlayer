@@ -14,7 +14,6 @@ class MainViewController: PulleyViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidChange), name: Notification.Name(rawValue: "AVPlayerItemDidStartPlaying"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidStop), name: Notification.Name(rawValue: "AVPlayerItemDidStopPlaying"), object: nil)
         
@@ -39,12 +38,13 @@ class MainViewController: PulleyViewController {
     */
     
     @objc func playerDidChange(notification: Notification) {
+        //Player starting, opening Player View Controller
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-        self.setDrawerPosition(position: .open, animated: true)
     }
     
     @objc func playerDidStop(notification: Notification) {
+        //Player is not playing, closing Player View Controller
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         self.setDrawerPosition(position: .collapsed, animated: true)

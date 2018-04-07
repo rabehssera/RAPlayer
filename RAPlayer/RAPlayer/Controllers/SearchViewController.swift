@@ -78,9 +78,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if searchBar.text != nil {
             WSManager.sharedInstance.search(text: searchBar.text!) { (success, result, error) in
                 if success {
-                    self.tracks = result!["tracks"] as! [Track]
+                    self.tracks = result!
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: (error != nil ? error?.localizedDescription : "An error occured"), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        
+                    }))
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
