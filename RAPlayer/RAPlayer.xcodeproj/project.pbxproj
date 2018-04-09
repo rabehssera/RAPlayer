@@ -159,7 +159,6 @@
 				9D3DF5EC206D68C900AD6C2B /* Frameworks */,
 				9D3DF5ED206D68C900AD6C2B /* Resources */,
 				EE98EEC470161F94DE777D3C /* [CP] Embed Pods Frameworks */,
-				2A66FEBD8A3E57EC21C2DB67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,21 +218,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A66FEBD8A3E57EC21C2DB67 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RAPlayer/Pods-RAPlayer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8794BB5D8684513BE7A49EC1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
